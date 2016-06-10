@@ -1,17 +1,9 @@
 FROM gcr.io/tensorflow/tensorflow:latest-devel-gpu
 
-# remove tensorflow source so we can re-add it with correct source
-RUN rm -Rf /tensorflow
-
-# git clone r0.8 branch of Tensorflow
-RUN git clone -b r0.8 --recursive https://github.com/tensorflow/tensorflow.git && \
-    cd tensorflow && \
-    git checkout r0.8
-
-WORKDIR /tensorflow
-
 # create a directory for volume mounting
 CMD mkdir /vol
+
+WORKDIR /tensorflow
 
 # recompile Tensorflow from source with TF_CUDA_COMPUTE_CAPABILITIES set to 3.0 for AWS
 # GPU instance compatability
