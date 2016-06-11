@@ -70,7 +70,7 @@ cd ~
 
 git clone --recursive https://github.com/tensorflow/tensorflow
 
-cd tensorflow
+# cd tensorflow
 
 # export TF_CUDA_COMPUTE_CAPABILITIES="3.0"
 
