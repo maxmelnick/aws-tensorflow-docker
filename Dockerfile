@@ -16,6 +16,4 @@ RUN ./configure && \
 # see: https://www.tensorflow.org/versions/master/how_tos/image_retraining/index.html
 RUN bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
 
-WORKDIR /tensorflow
-
 RUN ["/bin/bash"]
