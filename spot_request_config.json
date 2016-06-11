@@ -3,8 +3,8 @@
   "AllocationStrategy": "lowestPrice",
   "TargetCapacity": 1,
   "SpotPrice": "0.65",
-  "ValidFrom": "2016-06-11T11:20:16Z",
-  "ValidUntil": "2017-06-11T11:20:16Z",
+  "ValidFrom": "2016-06-11T14:11:58Z",
+  "ValidUntil": "2017-06-11T14:11:58Z",
   "TerminateInstancesWithExpiration": true,
   "LaunchSpecifications": [
     {
@@ -12,12 +12,6 @@
       "InstanceType": "g2.2xlarge",
       "KeyName": "aws_ds7key",
       "SpotPrice": "0.65",
-      "Monitoring": {
-        "Enabled": true
-      },
-      "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::956674081924:instance-profile/s3_access"
-      },
       "BlockDeviceMappings": [
         {
           "DeviceName": "/dev/sda1",
@@ -25,7 +19,7 @@
             "DeleteOnTermination": true,
             "VolumeType": "gp2",
             "VolumeSize": 50,
-            "SnapshotId": "snap-f70deff0"
+            "SnapshotId": "snap-e69d531d"
           }
         }
       ],
