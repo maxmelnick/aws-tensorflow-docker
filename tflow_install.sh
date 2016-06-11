@@ -43,7 +43,7 @@ END
 
 
 # Install Java 8 (required for Bazel)
-sudo add-apt-repository ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get -y update
 sudo apt-get install -y oracle-java8-installer
 
@@ -60,11 +60,11 @@ sudo apt-get install -y python-numpy swig python-dev python-wheel
 
 
 # Install Tensorflow from source
-cd /
+cd ~
 
 git clone --recursive https://github.com/tensorflow/tensorflow
 
-cd /tensorflow/tensorflow
+cd tensorflow
 
 export TF_CUDA_COMPUTE_CAPABILITIES="3.0"
 
@@ -75,4 +75,4 @@ export TF_CUDA_COMPUTE_CAPABILITIES="3.0"
 
 # Build image retrainer
 # see: https://www.tensorflow.org/versions/master/how_tos/image_retraining/index.html
-RUN bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
+bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
