@@ -7,10 +7,9 @@ WORKDIR /tensorflow
 ENV TF_CUDA_COMPUTE_CAPABILITIES 3.0
 
 RUN ./configure && \
-	bazel build -c opt --config=cuda //tensorflow/cc:tutorials_example_trainer && \
     bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package && \
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip && \
-    pip install --upgrade /tmp/pip/tensorflow-*.whl
+    pip install --upgrade /tmp/pip/tensorflow-0.8.0-py2-none-any.whl
 
 
 # Build image retrainer
