@@ -14,8 +14,8 @@ apt_packages=(
     git
 )
 
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 echo "Installing apt-get packages..."
 sudo apt-get install -y ${apt_packages[@]}
