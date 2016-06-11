@@ -43,13 +43,32 @@ if [ $(nvidia-smi -q |grep 'Product\ Name' |grep -c $PRODUCT_NAME) != 1 ]; then
 fi
 
 
-# Install docker
-# NOTE: you'll have to exit out of ubuntu user and log back in again in order to be able to use `docker` command without sudo
-curl -fsSL https://get.docker.com/ | sh
+## d) Install CUDA-toolkit 7.5
+cd ~/tmp
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
+if [ -f cuda-repo-ubuntu1404_7.5-18_amd64.deb ]; then
+    sudo dpkg -i cuda-repo-ubuntu1404_7.5-18_amd64.deb
+    sudo apt-get update
+    sudo apt-get -y install cuda
+else
+    echo 'Error: Failed to download cuda-repo-ubuntu1404_7.5-18_amd64.deb'
+    exit 4
+fi
+cd ~
 
-sudo usermod -aG docker ubuntu
+## e) Install CuDNN v4
+if [ -f ~/cudnn-7.0-linux-x64-v4.0-prod.tgz ]; then
+    cp ~/cudnn-7.0-linux-x64-v4.0-prod.tgz ~/tmp
+    cd ~/tmp
+    tar xvzf cudnn-7.0-linux-x64-v4.0-prod.tgz
+    sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+    sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+    cd ~
+else
+    echo 'Error: Can not found CuDNN.'
+    exit 5
+fi
 
-
-# Install nvidia-docker and nvidia-docker-plugin
-wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.0-rc.2/nvidia-docker_1.0.0.rc.2-1_amd64.deb
-sudo dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
+## f) Finish configure
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> ~/.bashrc
+echo 'export CUDA_HOME=/usr/local/cuda' >> ~/.bashrc

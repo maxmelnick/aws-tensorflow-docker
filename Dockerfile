@@ -1,8 +1,5 @@
 FROM gcr.io/tensorflow/tensorflow:latest-devel-gpu
 
-# create a directory for volume mounting
-CMD mkdir /vol
-
 WORKDIR /tensorflow
 
 # recompile Tensorflow from source with TF_CUDA_COMPUTE_CAPABILITIES set to 3.0 for AWS
@@ -19,4 +16,6 @@ RUN ./configure && \
 # see: https://www.tensorflow.org/versions/master/how_tos/image_retraining/index.html
 RUN bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
 
-WORKDIR /root
+WORKDIR /tensorflow
+
+RUN ["/bin/bash"]
