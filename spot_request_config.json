@@ -8,7 +8,7 @@
   "TerminateInstancesWithExpiration": true,
   "LaunchSpecifications": [
     {
-      "ImageId": "ami-fce3c696",
+      "ImageId": "ami-c23dc7af",
       "InstanceType": "g2.2xlarge",
       "KeyName": "aws_ds7key",
       "SpotPrice": "0.65",
