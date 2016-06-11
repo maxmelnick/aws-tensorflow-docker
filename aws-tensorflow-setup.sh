@@ -69,6 +69,10 @@ else
     exit 5
 fi
 
+## Clean up
+cd ~
+rm -rf ./tmp
+
 ## f) Finish configure
 echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> ~/.bashrc
 echo 'export CUDA_HOME=/usr/local/cuda' >> ~/.bashrc
