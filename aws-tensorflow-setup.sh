@@ -18,6 +18,7 @@ apt_packages=(
     python-wheel
     zip
     zlib1g-dev
+    awscli
 )
 
 sudo apt-get update
@@ -84,7 +85,6 @@ else
 fi
 cd ~
 
-sudo apt-get install -y awscli
 
 ## e) Install CuDNN v4
 cd ~
