@@ -120,7 +120,7 @@ chmod +x $anaconda
 
 ./$anaconda
 
-conda_path=/home/ubuntu/anaconda2/bin
+conda_path=/home/$USER/anaconda2/bin
 echo $conda_path
 
 cat >> ~/.bashrc << END
