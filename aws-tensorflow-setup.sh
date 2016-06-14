@@ -28,7 +28,7 @@ echo "Installing apt-get packages..."
 sudo apt-get install -y ${apt_packages[@]}
 sudo apt-get clean
 
-DRIVER_VERSION='361.45.11'
+
 PRODUCT_NAME='K520'
 
 
@@ -55,20 +55,21 @@ fi
 
 
 ## Install nVidia Driver
-mkdir ~/tmp
-cd ~/tmp
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$DRIVER_VERSION/NVIDIA-Linux-x86_64-$DRIVER_VERSION.run
-if [ -f NVIDIA-Linux-x86_64-$DRIVER_VERSION.run ]; then
-    sudo bash NVIDIA-Linux-x86_64-$DRIVER_VERSION.run -a -q
-else
-    echo 'Error: Failed to download driver.'
-    exit 2
-fi
-cd ~
-if [ $(nvidia-smi -q |grep 'Product\ Name' |grep -c $PRODUCT_NAME) != 1 ]; then
-    echo 'Error: Product Name does not matched.'
-    exit 3
-fi
+# DRIVER_VERSION='361.45.11'
+# mkdir ~/tmp
+# cd ~/tmp
+# wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$DRIVER_VERSION/NVIDIA-Linux-x86_64-$DRIVER_VERSION.run
+# if [ -f NVIDIA-Linux-x86_64-$DRIVER_VERSION.run ]; then
+#     sudo bash NVIDIA-Linux-x86_64-$DRIVER_VERSION.run -a -q
+# else
+#     echo 'Error: Failed to download driver.'
+#     exit 2
+# fi
+# cd ~
+# if [ $(nvidia-smi -q |grep 'Product\ Name' |grep -c $PRODUCT_NAME) != 1 ]; then
+#     echo 'Error: Product Name does not matched.'
+#     exit 3
+# fi
 
 
 
@@ -117,18 +118,14 @@ if [ ! -f $anaconda ]
 fi
 chmod +x $anaconda
 
-sudo ./$anaconda -b -p /opt/anaconda
+./$anaconda
 
-conda_path=/opt/anaconda/bin
+conda_path=/home/ubuntu/anaconda2/bin
 echo $conda_path
 
 cat >> ~/.bashrc << END
 PATH=:$conda_path:\$PATH
 END
-
-source ~/.bashrc
-
-conda install pip -y
 
 
 # Install Java 8 (required for Bazel)
@@ -142,3 +139,5 @@ echo "deb http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc
 curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
 sudo apt-get -y update && sudo apt-get install -y bazel
 sudo apt-get upgrade -y bazel
+
+# Reboot at this point
